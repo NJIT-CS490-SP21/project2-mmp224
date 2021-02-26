@@ -34,10 +34,19 @@ export function Board() {
       post(!data.post)
       });
     }, []);
+    
+    const boardReset = ()=> {
+        setBoard(board.map((element)=>element=""))
+    }
       
     return (
+        <div>
         <div class="board">
             {board.map((element, i)=><Board2 onClickButton={() => onClickButton(i)} element = {element}/>)} 
+        </div>
+        <div>
+            <button onClick = {boardReset} type="button">Reset </button>
+        </div>
         </div>
     )
     

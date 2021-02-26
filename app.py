@@ -15,7 +15,7 @@ db = SQLAlchemy(app)
 
 # IMPORTANT: This must be AFTER creating db variable to prevent
 # circular import issues
-from models import Person
+#from models import Person
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 socketio = SocketIO(
