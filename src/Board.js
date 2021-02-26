@@ -41,12 +41,12 @@ export function Board() {
       
     return (
         <div>
-        <div class="board">
-            {board.map((element, i)=><Board2 onClickButton={() => onClickButton(i)} element = {element}/>)} 
-        </div>
-        <div>
-            <button onClick = {boardReset} type="button">Reset </button>
-        </div>
+            <div class="board">
+                {board.map((element, i)=><Board2 onClickButton={() => onClickButton(i)} element = {element}/>)} 
+            </div>
+            <div>
+                <button onClick = {boardReset} type="button">Reset </button>
+            </div>
         </div>
     )
     
