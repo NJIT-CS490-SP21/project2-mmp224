@@ -10,33 +10,35 @@ const socket = io(); // Connects to socket connection
 
 function App() {
   const [ent,enter] = useState(false);
-  const [player,setPlayer] = useState({});
+  //const [player1,setPlayer] = useState({ "X": "", "O": "", "spectator": [] });
   const [player2, setPlayer2] = useState("");
   
   const login = (userName) =>{
     setPlayer2(userName)
-    enter((ent)=>{return !ent;})
+    enter(!ent)
     socket.emit('login',{setPlayer:userName});
   }
   
   useEffect(() => {
+  /*
     socket.on('login', (login) => {
       console.log('Logged in!');
       console.log(login);
       Object.keys(login).map((item) => {
                 console.log(item, login[item])
-                setPlayer2((prev) => ({
+                setPlayer((prev) => ({
                     ...prev,
                     [item]: login[item]
                 }))
             })
     });
+  */
   }, []);
   
     if(ent && player2!=""){
       return (
         <div>
-          <Board />
+          <Board player2={player2} />
         </div>
       );
     }

@@ -9,10 +9,13 @@ export function Login({login}){
     let player = useRef("")
     return(
         <div>
-            <input ref= {player} type="text" />
-            <button 
-                onClick = {() => login(player.current.value)}>Login
-            </button>
+            <center>
+            <h1>TIC TAC TOE</h1>
+                <input ref= {player} type="text" />
+                <button 
+                    onClick = {() => login(player.current.value)}>Login
+                </button>
+            </center>
         </div>
     );
 }
