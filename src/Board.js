@@ -13,7 +13,6 @@ export function Board({player2}) {
     const [player1,setPlayer] = useState({ "X": "", "O": "", "spectator": [] });
     const [follow, setFollow] = useState("X");
     
-    
     function onClickButton(i){
         let tap;
         tap = [...board];
@@ -38,7 +37,6 @@ export function Board({player2}) {
       console.log(data);
       setBoard([...data.tap]);
       post(!data.post)
-      
           if (data.follow == "X"){
               setFollow("O");
           }
@@ -50,12 +48,12 @@ export function Board({player2}) {
           console.log('Logged in!');
           console.log(login);
           Object.keys(login).map((item) => {
-                    console.log(item, login[item])
-                    setPlayer((prev) => ({
-                        ...prev,
-                        [item]: login[item]
-                    }))
-                })
+                console.log(item, login[item])
+                setPlayer((prev) => ({
+                    ...prev,
+                    [item]: login[item]
+                }))
+            })
         });
     }, []);
     
@@ -76,21 +74,25 @@ export function Board({player2}) {
     
     return (
         <div>
-            <h1> Players: </h1>
-            <p>X: {player1['X']}</p>
-            <p>O: {player1['O']}</p>
-            <h2> Spectators: </h2>
-            {player1['spectator'].map((player, i) => <p>{player}</p>)}
-            <div class="board">
-                {board.map((element, i)=><Board2 onClickButton={() => onClickButton(i)} element = {element} player1 = {player1} player2 = {player2}/>)} 
+            <center><h1>TIC TAC TOE</h1></center>
+            <div id="players">
+                <h1> Players: </h1>
+                <p><b>X:</b> {player1['X']}</p>
+                <p><b>O:</b> {player1['O']}</p>
             </div>
-            <div>
-                <b>{rank}</b>
+            <div id="spectators">
+                <h1> Spectators: </h1>
+                {player1['spectator'].map((player, i) => <li>{player}</li>)}
             </div>
-            <div>
-                <button onClick = {boardReset} type="button">Reset </button>
-            </div>
+            <center>
+                <div class="board">
+                    {board.map((element, i)=><Board2 onClickButton={() => onClickButton(i)} element = {element} player1 = {player1} player2 = {player2}/>)} 
+                </div>
+                <div class="fontSize">
+                    <b>{rank}</b>
+                </div>
+                <button onClick = {boardReset} class="button button1">Reset</button>
+            </center>
         </div>
     )
-    
 }

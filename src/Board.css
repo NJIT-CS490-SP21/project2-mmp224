@@ -4,13 +4,58 @@
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-	width: 300px; /* Total horizontal dimensions */
-	height: 300px; /* Total vertical dimensions */
-	display: grid; /* Enables CSS Grid */ 
-	grid-template-columns: repeat(3, 1fr); /* Total horizontal space broken into 3 columns */
-  grid-template-rows: repeat(3, 1fr); /* Total vertical space broken into 3 rows */
+  	width: 300px; /* Total horizontal dimensions */
+  	height: 300px; /* Total vertical dimensions */
+  	display: grid; /* Enables CSS Grid */ 
+  	grid-template-columns: repeat(3, 1fr); /* Total horizontal space broken into 3 columns */
+    grid-template-rows: repeat(3, 1fr); /* Total vertical space broken into 3 rows */
+}
+
+.fontSize {
+  font-size: 250%;
 }
 
 .box {
   border: 1px solid black; /* Shows the lines in the CSS grid */
+}
+
+.button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: 220ms all ease-in-out;
+  border-radius: 12px;
+}
+
+.button1 {
+  background-color: white;
+  color: black;
+}
+
+.button1:hover {
+  background-color: black;
+  color: white;
+}
+
+#players {
+    width: auto;
+    float: left;
+    height: auto;
+    border-style: solid;
+    padding: 30px;
+    margin: 100px;
+}
+#spectators {
+    width: auto;
+    float: right;
+    height: auto;
+    border-style: solid;
+    padding: 30px;
+    margin: 100px;
 }
