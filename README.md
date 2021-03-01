@@ -20,7 +20,7 @@
 ## Project Questions:
 ### Explains how someone who clones the repository can set up and run your project locally (what to install, any extra files to add)
 - Starting off with all the libraries needed for this project, simply by looking into the requirements.txt, all the libraries are listed in the file. Then run the following commands: pip install -r requirements.txt, pip install flask_socketio, pip install flask_cors. Lastly, Run echo "DANGEROUSLY_DISABLE_HOST_CHECK=true" > .env.development.local. Now change into the project directory. 2 terminals will be needed to run the app. In the first terminal, run app.py, and the the second terminal run npm start.
-- For heroku, the steps include of running these specific commands in the terminal: heroku create --buildpack heroku/python, heroku buildpacks:add --index 1 heroku/nodejs, pip freezre > requirements.txt, git add ., git commit -m "anything", pip install flask-socketio, git push heroku milestone_1:main
+- For heroku, the steps include of running these specific commands in the terminal: heroku create --buildpack heroku/python, heroku buildpacks:add --index 1 heroku/nodejs, pip freeze > requirements.txt, git add ., git commit -m "anything", pip install flask-socketio, git push heroku milestone_1:main
 
 ### Detailed description of technical issues and how you solved it (your process, what you searched, what resources you used)
 - A technical issue I ran into is during the heroku deployment where the libraries from the requirements didn't initally install properly. So by manually chaning the txt file, it solved the issue.
