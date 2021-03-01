@@ -91,7 +91,8 @@ export function Board({player2}) {
                 <div class="fontSize">
                     <b>{rank}</b>
                 </div>
-                <button onClick = {boardReset} class="button button1">Reset</button>
+                {player2 == player1["O"] && <button onClick = {boardReset} class="button button1">Reset</button>}
+                {player2 == player1["X"] && <button onClick = {boardReset} class="button button1">Reset</button>}
             </center>
         </div>
     )
