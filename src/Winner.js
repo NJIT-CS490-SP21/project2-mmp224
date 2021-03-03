@@ -9,8 +9,13 @@ export function Winner(board) {
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-      return board[a];
+      return board[a] + " is the Winner";
     }
   }
-  return null;
+  if(!board.includes(null)) {
+    return "Its a Draw";
+  }
+  else{
+    return null;
+  }
 }

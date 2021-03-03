@@ -60,7 +60,7 @@ export function Board({player2}) {
     const w = Winner(board)
     let rank
     if(w){
-        rank = `${w} is the Winner`
+        rank = `${w}`
     }
 
     const boardReset = ()=> {
