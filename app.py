@@ -63,6 +63,25 @@ def on_click(data): # data is whatever arg you pass in your emit call on client
     # the client that emmitted the event that triggered this function
     socketio.emit('click',  data, broadcast=True, include_self=False)
 
+
+def on_database(data): # data is whatever arg you pass in your emit call on client
+    if(models.Person.query.filter_by(username=data['setPlayer']).first() is None):
+        #print(str(data))
+        new_user = models.Person(username=data['setPlayer'], score=100)
+        db.session.add(new_user)
+        db.session.commit()
+        all_people = models.Person.query.all()
+        users = []
+        for person in all_people:
+            users.append(person.username)
+
+def ranking():
+    score = {}
+    table = models.Person.query.order_by(models.Person.score.desc()).all()
+    for i in table:
+        score[i.username] = i.score
+    return score
+
 @socketio.on('login')
 def on_login(login): # data is whatever arg you pass in your emit call on client
     print(str(login))
@@ -73,13 +92,14 @@ def on_login(login): # data is whatever arg you pass in your emit call on client
     else:
         spec.append(login["setPlayer"])
         player_ID["spectator"] = spec
-        
+    
+    on_database(login)
+    score = ranking()
+    socketio.emit('database', score, broadcast=True, include_self=False)
     # This emits the 'chat' event from the server to all clients except for
     # the client that emmitted the event that triggered this function
     socketio.emit('login',  player_ID, broadcast=True, include_self=False)
     
-
-
 # Note we need to add this line so we can import app in the python shell
 if __name__ == "__main__":
 # Note that we don't call app.run anymore. We call socketio.run with app arg

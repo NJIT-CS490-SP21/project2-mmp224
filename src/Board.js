@@ -12,6 +12,7 @@ export function Board({player2}) {
     let [either, post] = useState(true);
     const [player1,setPlayer] = useState({ "X": "", "O": "", "spectator": [] });
     const [follow, setFollow] = useState("X");
+    const [tally, setTally] = useState({});
     
     function onClickButton(i){
         let tap;
@@ -36,7 +37,7 @@ export function Board({player2}) {
       console.log('Click event received!');
       console.log(data);
       setBoard([...data.tap]);
-      post(!data.post)
+      post(!data.post);
           if (data.follow == "X"){
               setFollow("O");
           }
@@ -44,23 +45,28 @@ export function Board({player2}) {
               setFollow("X");
           }
       });
+      socket.on('database', (score) => {
+          setTally(score);
+          console.log(tally);
+      }, []);
+      
       socket.on('login', (login) => {
           console.log('Logged in!');
           console.log(login);
           Object.keys(login).map((item) => {
-                console.log(item, login[item])
+                console.log(item, login[item]);
                 setPlayer((prev) => ({
                     ...prev,
                     [item]: login[item]
-                }))
-            })
+                }));
+            });
         });
     }, []);
     
-    const w = Winner(board)
-    let rank
+    const w = Winner(board);
+    let rank;
     if(w){
-        rank = `${w}`
+        rank = `${w}`;
     }
 
     const boardReset = ()=> {
@@ -68,8 +74,8 @@ export function Board({player2}) {
         tap = [...board];
         tap.fill(null);
         setBoard(tap);
-        socket.emit('click', {tap : tap, post : "X"})
-    }
+        socket.emit('click', {tap : tap, post : "X"});
+    };
     
     
     return (
@@ -94,6 +100,12 @@ export function Board({player2}) {
                 {player2 == player1["O"] && <button onClick = {boardReset} class="button button1">Reset</button>}
                 {player2 == player1["X"] && <button onClick = {boardReset} class="button button1">Reset</button>}
             </center>
+            <div>
+            <center>
+            <h1>LEADERBOARD:</h1>
+                {Object.keys(tally).map(keys => <ul> {keys} {tally[keys]} </ul>)}
+            </center>
+            </div>
         </div>
-    )
+    );
 }
