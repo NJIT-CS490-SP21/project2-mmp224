@@ -12,10 +12,10 @@ export function Winner(board) {
       return board[a] + " is the Winner";
     }
   }
-  if(!board.includes(null)) {
-    return "Its a Draw";
+  if(board.includes(null)) {
+    return null;
   }
   else{
-    return null;
+    return "Its a Draw";
   }
 }
