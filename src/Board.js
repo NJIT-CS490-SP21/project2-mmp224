@@ -12,11 +12,14 @@ export function Board({player2}) {
     let [either, post] = useState(true);
     const [player1,setPlayer] = useState({ "X": "", "O": "", "spectator": [] });
     const [follow, setFollow] = useState("X");
-    const [tally, setTally] = useState({});
+    const [tally, setTally] = useState([]);
     
     function onClickButton(i){
         let tap;
         tap = [...board];
+        
+        let dict2 = {};
+        
         if(!tap[i]) {
             if(player2 == player1[follow]){
                 if (follow == "X") {
@@ -29,8 +32,18 @@ export function Board({player2}) {
                 }
                 setBoard(tap);
                 socket.emit('click', {tap : tap, post : either, follow});
+                const w = Winner(tap);
+                if(w == "X"){
+                    dict2['winner'] = player1["X"];
+                    dict2['loser'] = player1["O"];
+                }
+                else if(w == "O"){
+                    dict2['winner'] = player1["O"];
+                    dict2['loser'] = player1["X"];
+                }
             }
         }
+        socket.emit('update',{dict2 : dict2});
     }
     useEffect(() => {
     socket.on('click', (data) => {
@@ -46,6 +59,10 @@ export function Board({player2}) {
           }
       });
       socket.on('database', (score) => {
+          setTally(score);
+          console.log(tally);
+      }, []);
+      socket.on('updateScore', (score) => {
           setTally(score);
           console.log(tally);
       }, []);
@@ -65,8 +82,11 @@ export function Board({player2}) {
     
     const w = Winner(board);
     let rank;
-    if(w){
-        rank = `${w}`;
+    if(w == "Draw"){
+        rank = `Its a Draw`;
+    }
+    else if(w){
+        rank = `${w} is the Winner`;
     }
 
     const boardReset = ()=> {
@@ -101,10 +121,19 @@ export function Board({player2}) {
                 {player2 == player1["X"] && <button onClick = {boardReset} class="button button1">Reset</button>}
             </center>
             <div>
-            <center>
-            <h1>LEADERBOARD:</h1>
-                {Object.keys(tally).map(keys => <ul> {keys} {tally[keys]} </ul>)}
-            </center>
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="2">LEADERBOARD</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {tally.map((keys, i)=>(player2 === Object.keys(tally[i])[0])?
+                        <tr><td class="colorBoard">{Object.keys(tally[i])[0]}</td>
+                        <td class="colorBoard">{Object.values(tally[i])[0]}</td></tr>:
+                        <tr><td>{Object.keys(tally[i])[0]}</td><td>{Object.values(tally[i])[0]}</td></tr>)}
+                    </tbody>
+                </table>
             </div>
         </div>
     );

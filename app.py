@@ -47,21 +47,31 @@ def on_connect():
 def on_disconnect():
     print('User disconnected!')
 
-# When a client emits the event 'chat' to the server, this function is run
-# 'chat' is a custom event name that we just decided
-@socketio.on('chat')
-def on_chat(data): # data is whatever arg you pass in your emit call on client
-    print(str(data))
-    # This emits the 'chat' event from the server to all clients except for
-    # the client that emmitted the event that triggered this function
-    socketio.emit('chat',  data, broadcast=True, include_self=False)
-
 @socketio.on('click')
 def on_click(data): # data is whatever arg you pass in your emit call on client
     print(str(data))
     # This emits the 'chat' event from the server to all clients except for
     # the client that emmitted the event that triggered this function
     socketio.emit('click',  data, broadcast=True, include_self=False)
+    
+@socketio.on('update')
+def on_update(update):
+    print("Im here")
+    print(update)
+    explore_Database(update)
+    score = ranking()
+    socketio.emit('updateScore', score, broadcast=True)
+    
+    
+def explore_Database(data):
+    db.session.query(models.Person)\
+       .filter(models.Person.username == data['dict2']['winner'])\
+       .update({models.Person.score: models.Person.score + 1})
+    db.session.query(models.Person)\
+       .filter(models.Person.username == data['dict2']['loser'])\
+       .update({models.Person.score: models.Person.score - 1})
+    db.session.commit()
+
 
 
 def on_database(data): # data is whatever arg you pass in your emit call on client
@@ -76,10 +86,10 @@ def on_database(data): # data is whatever arg you pass in your emit call on clie
             users.append(person.username)
 
 def ranking():
-    score = {}
+    score = []
     table = models.Person.query.order_by(models.Person.score.desc()).all()
     for i in table:
-        score[i.username] = i.score
+        score.append({i.username: i.score})
     return score
 
 @socketio.on('login')
