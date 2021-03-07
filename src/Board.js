@@ -88,6 +88,12 @@ export function Board({player2}) {
     else if(w){
         rank = `${w} is the Winner`;
     }
+    
+    const [hide, setHide] = useState(false)
+    
+    const clickHide=()=> {
+        setHide(!hide)
+    }
 
     const boardReset = ()=> {
         let tap;
@@ -96,7 +102,6 @@ export function Board({player2}) {
         setBoard(tap);
         socket.emit('click', {tap : tap, post : "X"});
     };
-    
     
     return (
         <div>
@@ -117,10 +122,12 @@ export function Board({player2}) {
                 <div class="fontSize">
                     <b>{rank}</b>
                 </div>
-                {player2 == player1["O"] && <button onClick = {boardReset} class="button button1">Reset</button>}
-                {player2 == player1["X"] && <button onClick = {boardReset} class="button button1">Reset</button>}
             </center>
+            <button onClick = {clickHide} class="button button1">View/Hide LeaderBoard</button>
+            {player2 == player1["O"] && <button onClick = {boardReset} class="button button1">Reset</button>}
+            {player2 == player1["X"] && <button onClick = {boardReset} class="button button1">Reset</button>}
             <div>
+            {hide?
                 <table>
                     <thead>
                         <tr>
@@ -134,6 +141,7 @@ export function Board({player2}) {
                         <tr><td>{Object.keys(tally[i])[0]}</td><td>{Object.values(tally[i])[0]}</td></tr>)}
                     </tbody>
                 </table>
+            :null}
             </div>
         </div>
     );
