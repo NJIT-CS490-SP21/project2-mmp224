@@ -15,8 +15,15 @@ export function Board({player2}) {
     const [tally, setTally] = useState([]);
     
     function onClickButton(i){
+        
+        
         let tap;
         tap = [...board];
+        
+        if(Winner(tap))
+        {
+            return;
+        }
         
         let dict2 = {};
         
