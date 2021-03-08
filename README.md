@@ -40,14 +40,14 @@
 16. git push heroku main
 
 ## Project Questions:
-###Explains how someone who clones the repository can set up and run your project locally (what to install, any extra files to add)
+### Explains how someone who clones the repository can set up and run your project locally (what to install, any extra files to add)
 - Starting off with all the libraries needed for this project, simply by looking into the requirements.txt, all the libraries are listed in the file. Then run the following commands: pip install -r requirements.txt, pip install flask_socketio, pip install flask_cors. Lastly, Run echo "DANGEROUSLY_DISABLE_HOST_CHECK=true" > .env.development.local. Now change into the project directory. 2 terminals will be needed to run the app. In the first terminal, run app.py, and the the second terminal run npm start.
 - The extra file necessary is the .env file which needs to be hidden in the .gitignore.
 
-###Detailed description of technical issues and how you solved it (your process, what you searched, what resources you used)
+### Detailed description of technical issues and how you solved it (your process, what you searched, what resources you used)
 - A technical issue I ran into is during the heroku deployment where the libraries from the requirements didn't initally install properly. So by manually chaning the txt file, it solved the issue.
 
-###Detailed description of known problems and how you would address them if you had more time. If none exist, what additional features might you implement, and how?
+### Detailed description of known problems and how you would address them if you had more time. If none exist, what additional features might you implement, and how?
 - A known problem right now is that fact that loggining in with the same username can allow the user to play as both X & O, which technically shouldn't be allowed.
 - A few additional features I would add would include of keeping logged in users unique so that they woudn't overlap, a logout button and being able to chat while playing the game to make it more engaging. The logout button would make the app more user friendly and allow other to play rather than restarting the app itself. I would also rework my whole CSS situation because although it looks alright now, it can look much better if I put more time into it. 
 
