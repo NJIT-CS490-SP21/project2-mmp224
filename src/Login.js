@@ -1,21 +1,20 @@
 import './App.css';
-import { ListItem } from './ListItem.js';
-import { useState, useRef, useEffect } from 'react';
-import io from 'socket.io-client';
+import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
 
-const socket = io();
-
-export function Login({login}){
-    let player = useRef("")
-    return(
-        <div>
-            <center>
-            <h1>TIC TAC TOE</h1>
-                <input ref= {player} type="text" />
-                <button 
-                    onClick = {() => login(player.current.value)}>Login
-                </button>
-            </center>
-        </div>
-    );
+export default function Login({ login }) {
+  const player = useRef('');
+  return (
+    <div>
+      <center>
+        <h1>TIC TAC TOE</h1>
+        <input ref={player} type="text" />
+        <button type="button" onClick={() => login(player.current.value)}>Login</button>
+      </center>
+    </div>
+  );
 }
+
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
+};

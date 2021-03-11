@@ -1,26 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
-import { ListItem } from './ListItem.js';
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
-import { Board } from './Board.js';
-import {Login} from './Login.js';
+import Board from './Board';
+import Login from './Login';
 
 const socket = io(); // Connects to socket connection
 
 function App() {
-  const [ent,enter] = useState(false);
-  //const [player1,setPlayer] = useState({ "X": "", "O": "", "spectator": [] });
-  const [player2, setPlayer2] = useState("");
-  
-  const login = (userName) =>{
-    setPlayer2(userName)
-    enter(!ent)
-    socket.emit('login',{setPlayer:userName});
-  }
-  
+  const [ent, enter] = useState(false);
+  // const [player1,setPlayer] = useState({ "X": "", "O": "", "spectator": [] });
+  const [player2, setPlayer2] = useState('');
+
+  const login = (userName) => {
+    setPlayer2(userName);
+    enter(!ent);
+    socket.emit('login', { setPlayer: userName });
+  };
+
   useEffect(() => {
-  /*
+    /*
     socket.on('login', (login) => {
       console.log('Logged in!');
       console.log(login);
@@ -34,23 +32,20 @@ function App() {
     });
   */
   }, []);
-  
-    if(ent && player2!=""){
-      return (
-        <div>
-          <Board player2={player2} />
-        </div>
-      );
-    }
-    else{
-      return (
-        <div>
-          <Login login = {login}/>
-        </div>
-        );
-    }
-  
+
+  if (ent && player2 !== '') {
+    return (
+      <div>
+        <Board player2={player2} />
+      </div>
+    );
   }
+  return (
+    <div>
+      <Login login={login} />
+    </div>
+  );
+}
 
 export default App;
 /*
@@ -61,7 +56,7 @@ function App() {
   function onClickButton() {
     if (inputRef != null) {
       const message = inputRef.current.value;
-      // If your own client sends a message, we add it to the list of messages to 
+      // If your own client sends a message, we add it to the list of messages to
       // render it on the UI.
       setMessages(prevMessages => [...prevMessages, message]);
       socket.emit('chat', { message: message });

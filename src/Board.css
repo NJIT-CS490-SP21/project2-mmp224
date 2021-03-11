@@ -1,15 +1,21 @@
 .board {
-    font-family: Impact, fantasy;
-    font-size: 300%;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-  	width: 300px; /* Total horizontal dimensions */
-  	height: 300px; /* Total vertical dimensions */
-  	display: grid; /* Enables CSS Grid */ 
-  	grid-template-columns: repeat(3, 1fr); /* Total horizontal space broken into 3 columns */
-    grid-template-rows: repeat(3, 1fr); /* Total vertical space broken into 3 rows */
-    border: 1px solid black;
+  font-family: Impact, fantasy;
+  font-size: 300%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px; /* Total horizontal dimensions */
+  height: 300px; /* Total vertical dimensions */
+  display: grid; /* Enables CSS Grid */
+  grid-template-columns: repeat(
+    3,
+    1fr
+  ); /* Total horizontal space broken into 3 columns */
+  grid-template-rows: repeat(
+    3,
+    1fr
+  ); /* Total vertical space broken into 3 rows */
+  border: 1px solid black;
 }
 
 .fontSize {
@@ -45,34 +51,34 @@
 }
 
 #players {
-    width: auto;
-    float: left;
-    height: auto;
-    border-style: solid;
-    padding: 30px;
-    margin: 100px;
+  width: auto;
+  float: left;
+  height: auto;
+  border-style: solid;
+  padding: 30px;
+  margin: 100px;
 }
 #spectators {
-    width: auto;
-    float: right;
-    height: auto;
-    border-style: solid;
-    padding: 30px;
-    margin: 100px;
+  width: auto;
+  float: right;
+  height: auto;
+  border-style: solid;
+  padding: 30px;
+  margin: 100px;
 }
 
 table,
 td {
-    padding: 5px;
-    border: 3px solid black;
+  padding: 5px;
+  border: 3px solid black;
 }
 
 thead,
 tfoot {
-    color: black;
+  color: black;
 }
 
-.colorBoard{
-  background-color:yellow;
+.colorBoard {
+  background-color: yellow;
   color: blue;
 }
