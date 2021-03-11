@@ -21,7 +21,7 @@ function Board({ player2 }) {
       return;
     }
 
-    const dict2 = {};
+    const dict2 = { winner: '', loser: '' };
 
     if (!tap[i]) {
       if (player2 === player1[follow]) {
