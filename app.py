@@ -62,6 +62,10 @@ def on_click(
     # the client that emmitted the event that triggered this function
     SOCKETIO.emit('click', data, broadcast=True, include_self=False)
 
+def click_test(
+        data):
+    return data
+
 
 @SOCKETIO.on('update')
 def on_update(update):
@@ -127,6 +131,17 @@ def on_login(
     # This emits the 'chat' event from the server to all clients except for
     # the client that emmitted the event that triggered this function
     SOCKETIO.emit('login', PLAYER_ID, broadcast=True, include_self=False)
+
+def login_test(
+        login):
+    if "X" not in PLAYER_ID:
+        PLAYER_ID["X"] = login["setPlayer"]
+    elif "O" not in PLAYER_ID:
+        PLAYER_ID["O"] = login["setPlayer"]
+    elif login["setPlayer"] not in (SPEC, PLAYER_ID["X"], PLAYER_ID["O"]):
+        SPEC.append(login["setPlayer"])
+        PLAYER_ID["spectator"] = SPEC
+    return PLAYER_ID
 
 
 # Note we need to add this line so we can import app in the python shell

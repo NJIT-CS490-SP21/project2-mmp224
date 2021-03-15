@@ -8,7 +8,7 @@ export default function Login({ login }) {
     <div>
       <center>
         <h1>TIC TAC TOE</h1>
-        <input ref={player} type="text" />
+        <input id="input" ref={player} type="text" />
         <button type="button" onClick={() => login(player.current.value)}>Login</button>
       </center>
     </div>
