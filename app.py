@@ -62,8 +62,9 @@ def on_click(
     # the client that emmitted the event that triggered this function
     SOCKETIO.emit('click', data, broadcast=True, include_self=False)
 
-def click_test(
-        data):
+
+def click_test(data):
+    '''CLICK TEST'''
     return data
 
 
@@ -103,6 +104,20 @@ def on_database(
             users.append(person.username)
 
 
+def database_test(
+        data):  # data is whatever arg you pass in your emit call on client
+    '''DATABASE TEST'''
+    #print(str(data))
+    new_user = models.Person(username=data['setPlayer'], score=100)
+    db.session.add(new_user)
+    db.session.commit()
+    all_people = models.Person.query.all()
+    users = []
+    for person in all_people:
+        users.append(person.username)
+    return users
+
+
 def ranking():
     '''LEADERBOARD'''
     score = []
@@ -132,8 +147,8 @@ def on_login(
     # the client that emmitted the event that triggered this function
     SOCKETIO.emit('login', PLAYER_ID, broadcast=True, include_self=False)
 
-def login_test(
-        login):
+def login_test(login):
+    '''LOGIN TEST'''
     if "X" not in PLAYER_ID:
         PLAYER_ID["X"] = login["setPlayer"]
     elif "O" not in PLAYER_ID:

@@ -57,7 +57,7 @@ class UpdateUserTestCase(unittest.TestCase):
             self.assertNotEqual(actual_result, expected_result)
     
     def test_add_user_3(self):
-        for test in self.failure_test_params:
+        for test in self.failure_test_params_2:
             actual_result = click_test(test[USERS_INPUT])
             expected_result = test[EXPECTED_OUTPUT]
             self.assertNotEqual(actual_result, expected_result)
