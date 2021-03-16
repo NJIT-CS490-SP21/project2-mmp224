@@ -147,6 +147,7 @@ def on_login(
     # the client that emmitted the event that triggered this function
     SOCKETIO.emit('login', PLAYER_ID, broadcast=True, include_self=False)
 
+
 def login_test(login):
     '''LOGIN TEST'''
     if "X" not in PLAYER_ID:

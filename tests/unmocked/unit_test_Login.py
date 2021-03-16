@@ -12,6 +12,7 @@ import models
 USERS_INPUT = 'users'
 EXPECTED_OUTPUT = "expected"
 
+
 class UpdateUserTestCase(unittest.TestCase):
     def setUp(self):
         self.success_test_params = [
@@ -71,26 +72,27 @@ class UpdateUserTestCase(unittest.TestCase):
     def test_add_user(self):
         for test in self.success_test_params:
             actual_result = login_test(test[USERS_INPUT])
-            
+
             expected_result = test[EXPECTED_OUTPUT]
 
             self.assertEqual(actual_result, expected_result)
-    
+
     def test_add_user_2(self):
         for test in self.failure_test_params:
             actual_result = login_test(test[USERS_INPUT])
-            
+
             expected_result = test[EXPECTED_OUTPUT]
 
             self.assertNotEqual(actual_result, expected_result)
-        
+
     def test_dict_user(self):
         for test in self.success_test_params_2:
             actual_result = login_test(test[USERS_INPUT])
-            
+
             expected_result = test[EXPECTED_OUTPUT]
-            
+
             self.assertDictEqual(actual_result, expected_result)
-            
+
+
 if __name__ == '__main__':
     unittest.main()
